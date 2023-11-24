@@ -19,19 +19,13 @@
 //////////////////////////////////////////////////////////////////////////////
 
 module BRANCH_ADDR_GEN (
-    input [31:0] PC,
-    input [31:0] RS1,
-    input [31:0] I_TYPE,
-    input [31:0] J_TYPE,
-    input [31:0] B_TYPE,
-    output logic [31:0] JALR,
-    output logic [31:0] BRANCH,
-    output logic [31:0] JAL
+    input [31:0] PC, RS1, I_TYPE, J_TYPE, B_TYPE,
+    output logic [31:0] JALR, BRANCH, JAL
     );
 
-    assgin JALR = ( I_TYPE + RS1 );
-    assgin BRANCH = ( B_TYPE + PC );
-    assgin JAL = ( J_TYPE + PC );
+    assign JALR = ( I_TYPE + RS1 );
+    assign BRANCH = ( B_TYPE + PC );
+    assign JAL = ( J_TYPE + PC );
 
 endmodule
 

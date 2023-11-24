@@ -19,16 +19,13 @@
 //////////////////////////////////////////////////////////////////////////////
 
 module BRANCH_COND_GEN (
-    input [31:0] RS1,
-    input [31:0] RS2,
-    output logic BR_EQ,
-    output logic BR_LT,
-    output logic BR_LTU
+    input [31:0] RS1, RS2,
+    output logic BR_EQ, BR_LT, BR_LTU
     );
 
-    assgin BR_EQ = (RS1 == RS2 ? 1 : 0);
-    assgin BR_LT = ($signed(RS1) < $signed(RS2) ? 1 : 0);
-    assgin BR_LTU = (RS1 < RS2 ? 1 : 0);
+    assign BR_EQ = (RS1 == RS2 ? 1 : 0);
+    assign BR_LT = ($signed(RS1) < $signed(RS2) ? 1 : 0);
+    assign BR_LTU = (RS1 < RS2 ? 1 : 0);
 
 endmodule
 
