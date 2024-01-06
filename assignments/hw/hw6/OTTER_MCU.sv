@@ -92,7 +92,7 @@ module OTTER_MCU (
 
     IMMED_GEN       I_GEN(
         // Inputs
-        .IR         (), 
+        .IR         (),
         // Outputs
         .U_TYPE     (),
         .I_TYPE     (),
@@ -143,7 +143,7 @@ module OTTER_MCU (
         .MEM_RDEN2  (),
         .CSR_WE     (),
         .INT_TAKEN  (),
-        .MRET_EXEC  () 
+        .MRET_EXEC  ()
         );
 
     initial begin

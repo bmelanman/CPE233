@@ -6,7 +6,7 @@
 // Create Date: Nov-21-2023
 // Module Name: BRANCH_ADDR_GEN
 // Target Devices: OTTER MCU on Basys3
-// Description: OTTER MCU branch address generator. Creates 3 signals that 
+// Description: OTTER MCU branch address generator. Creates 3 signals that
 //              conditionally change the program counter (PC).
 //
 // Dependencies:

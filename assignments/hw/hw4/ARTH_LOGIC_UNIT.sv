@@ -18,7 +18,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 module ARTH_LOGIC_UNIT (
-    input [3:0] ALU_FUNC, 
+    input [3:0] ALU_FUNC,
     input [31:0] SRC_A, SRC_B,
     output [31:0] RESULT
     );
@@ -38,7 +38,7 @@ module ARTH_LOGIC_UNIT (
             0b0110: RESULT <= ( SRC_A | SRC_B );    // OR
             0b0100: RESULT <= ( SRC_A ^ SRC_B );    // XOR
             0b0111: RESULT <= ( SRC_A & SRC_B );    // AND
-            
+
             0b0000: RESULT <= ( SRC_A + SRC_B );    // ADD
             0b1000: RESULT <= ( SGND_A - SGND_B );  // SUB
 

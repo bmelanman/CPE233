@@ -46,7 +46,7 @@
 // Revision 1.07 - remove unused wordAddr1 signal
 //
 //////////////////////////////////////////////////////////////////////////////////
-                                                                                                                             
+
   module Memory (
     input MEM_CLK,
     input MEM_RDEN1,        // read enable Instruction
@@ -62,36 +62,36 @@
     output logic IO_WR,     // IO 1-write 0-read
     output logic [31:0] MEM_DOUT1,  // Instruction
     output logic [31:0] MEM_DOUT2); // Data
-    
+
     logic [13:0] wordAddr2;
     logic [31:0] memReadWord, ioBuffer, memReadSized;
     logic [1:0] byteOffset;
     logic weAddrValid;      // active when saving (WE) to valid memory address
-       
+
     (* rom_style="{distributed | block}" *)
     (* ram_decomp = "power" *) logic [31:0] memory [0:16383];
-    
+
     initial begin
         $readmemh("otter_memory.mem", memory, 0, 16383);
     end
-    
+
     assign wordAddr2 = MEM_ADDR2[15:2];
     assign byteOffset = MEM_ADDR2[1:0];     // byte offset of memory address
-         
+
     // NOT USED IN OTTER
     //Check for misalligned or out of bounds memory accesses
     //assign ERR = ((MEM_ADDR1 >= 2**ACTUAL_WIDTH)|| (MEM_ADDR2 >= 2**ACTUAL_WIDTH)
     //                || MEM_ADDR1[1:0] != 2'b0 || MEM_ADDR2[1:0] !=2'b0)? 1 : 0;
-            
+
     // buffer the IO input for reading
     always_ff @(posedge MEM_CLK) begin
       if(MEM_RDEN2)
         ioBuffer <= IO_IN;
     end
-    
+
     // BRAM requires all reads and writes to occur synchronously
     always_ff @(posedge MEM_CLK) begin
-    
+
       // save data (WD) to memory (ADDR2)
       if (weAddrValid == 1) begin     // write enable and valid address space
         case({MEM_SIZE,byteOffset})
@@ -115,7 +115,7 @@
       if (MEM_RDEN2)                       // Read word from memory
         memReadWord <= memory[wordAddr2];
     end
-       
+
     // Change the data word into sized bytes and sign extend
     always_comb begin
       case({MEM_SIGN,MEM_SIZE,byteOffset})
@@ -123,26 +123,26 @@
         5'b00010: memReadSized = {{24{memReadWord[23]}},memReadWord[23:16]};
         5'b00001: memReadSized = {{24{memReadWord[15]}},memReadWord[15:8]};
         5'b00000: memReadSized = {{24{memReadWord[7]}},memReadWord[7:0]};
-                                    
+
         5'b00110: memReadSized = {{16{memReadWord[31]}},memReadWord[31:16]};  // signed half
         5'b00101: memReadSized = {{16{memReadWord[23]}},memReadWord[23:8]};
         5'b00100: memReadSized = {{16{memReadWord[15]}},memReadWord[15:0]};
-            
+
         5'b01000: memReadSized = memReadWord;                   // word
-               
+
         5'b10011: memReadSized = {24'd0,memReadWord[31:24]};    // unsigned byte
         5'b10010: memReadSized = {24'd0,memReadWord[23:16]};
         5'b10001: memReadSized = {24'd0,memReadWord[15:8]};
         5'b10000: memReadSized = {24'd0,memReadWord[7:0]};
-               
+
         5'b10110: memReadSized = {16'd0,memReadWord[31:16]};    // unsigned half
         5'b10101: memReadSized = {16'd0,memReadWord[23:8]};
         5'b10100: memReadSized = {16'd0,memReadWord[15:0]};
-            
+
         default:  memReadSized = 32'b0;     // unsupported size, byte offset combination
       endcase
     end
- 
+
     // Memory Mapped IO
     always_comb begin
       if(MEM_ADDR2 >= 32'h00010000) begin  // external address range
@@ -156,6 +156,6 @@
         weAddrValid = MEM_WE2;      // address in valid memory range
       end
     end
-        
+
 endmodule
 // End of File //

@@ -46,15 +46,15 @@ module PROG_COUNTER (
     end
 
     always_ff @( CLK ) begin : PROGRAM_COUNTER
-        
+
         // Reset gets priority over write
-        if (PC_RST) 
+        if (PC_RST)
             PC_COUNT <= 0;
-        else if (PC_WRITE) 
+        else if (PC_WRITE)
             PC_COUNT <= PC_DIN;
         else
             PC_COUNT <= PC_COUNT;
-        
+
     end
 endmodule
 

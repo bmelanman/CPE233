@@ -18,7 +18,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 module IMMED_GEN (
-    input  [31:0] IR, 
+    input  [31:0] IR,
     output [31:0] U_TYPE,
     output [31:0] I_TYPE,
     output [31:0] S_TYPE,

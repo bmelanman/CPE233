@@ -26,19 +26,19 @@ module ProgRom(
 
 	// convert byte address to word address
 	assign wordAddr = PROG_ADDR[15:2];
-    
+
 	(* rom_style="{distributed | block}" *)
 	(* ram_decomp = "power" *) logic [31:0] rom [0:16383];
-    
+
 	// initialize the ROM with the otter_memory.mem file
 	initial begin
     	   $readmemh("otter_memory.mem", rom, 0, 16383);
 	end
-    
+
 	always_ff @(posedge PROG_CLK) begin
     	   INSTRUCT <= rom[wordAddr];
 	end
- 
+
 endmodule
 
 // End of File //

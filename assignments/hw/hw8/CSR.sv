@@ -3,11 +3,10 @@
 // Engineer: Bryce Melander
 // Company: Cal Poly
 //
-// Create Date: Nov-21-2023
-// Module Name: BRANCH_COND_GEN
+// Create Date: Dec-18-2023
+// Module Name: CSR
 // Target Devices: OTTER MCU on Basys3
-// Description: OTTER MCU branch condition generator. Creates 3 signals that
-//              are the result of 3 comparisons of 2 input values.
+// Description: 
 //
 // Dependencies:
 //
@@ -18,14 +17,17 @@
 // reserved, see http://opensource.org/licenses/MIT for more details.
 //////////////////////////////////////////////////////////////////////////////
 
-module BRANCH_COND_GEN (
-    input [31:0] RS1, RS2,
-    output logic BR_EQ, BR_LT, BR_LTU
+module CSR (
+
     );
 
-    assign BR_EQ = (RS1 == RS2 ? 1 : 0);
-    assign BR_LT = ($signed(RS1) < $signed(RS2) ? 1 : 0);
-    assign BR_LTU = (RS1 < RS2 ? 1 : 0);
+    initial begin
+
+    end
+
+    always_comb begin
+
+    end
 
 endmodule
 
